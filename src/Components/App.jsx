@@ -10,13 +10,12 @@ import ForgotPassword from './AuthComponents/ForgotPassword'
 
 const App= () => {
   return (
-      <Container className='d-flex align-items-center justify-content-center' style={{minHeight: "100vh"}}>
-        <div className='w-100' style={{maxWidth: '400px'}}>
           <Router>
             <AuthProvider>  
               <Routes>
                 <Route element={<PrivateRoute />}>
                   <Route path="/" element={<Dashboard />} exact/>
+                  <Route path="/profile" element={<Dashboard />}/>
                 </Route>
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
@@ -24,8 +23,6 @@ const App= () => {
               </Routes>                                        
             </AuthProvider>
           </Router>
-        </div>
-      </Container>
   )
 }
 

@@ -1,30 +1,28 @@
-import React, { useState } from 'react'
-import { useAuth } from '../../contexts/AuthContexts';
-import { useNavigate } from 'react-router-dom';
-import PrivateRoute from '../../utils/PrivateRoute';
+import React, { useState } from "react";
+import { useLocation  } from "react-router-dom";
+import Header from "./Header";
+import ContentArea from "./ContentArea";
+import Footer from "./Footer";
+import Profile from "./Profile";
 
 export default function Dashboard() {
-const { currentUser, logout } = useAuth();
-const [error, setError] = useState('')
-const navigateTo = useNavigate();
+  const location = useLocation();
+  const isProfilePath = location.pathname === "/profile";
 
-const handleLogout = async () => {
-    setError('')
 
-    try {
-        await logout()
-        navigateTo('/login')
-    }
-    catch {
-        setError("Failed to log out")
-    }
-  }
 
   return (
-    <div>
-      Dashboard <br/>
-      {currentUser && currentUser.email}
-      <button onClick={handleLogout}>Log Out</button>
-    </div>
-  )
+    // <div>
+    //   Dashboard <br/>
+    //   {currentUser && currentUser.email}
+    //   <button onClick={handleLogout}>Log Out</button>
+    // </div>
+      <div className="dashboard">
+        <Header />
+        <div className="container">
+          {isProfilePath ? <Profile/>:<ContentArea/>}
+        </div>
+        <Footer />
+      </div>
+  );
 }
